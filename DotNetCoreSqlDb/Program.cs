@@ -3,6 +3,14 @@ using Microsoft.Extensions.DependencyInjection;
 using DotNetCoreSqlDb.Data;
 var builder = WebApplication.CreateBuilder(args);
 
+string mens =
+    "connstringxxxxx:" +
+    builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING") + "-" +
+    builder.Configuration["AZURE_REDIS_CONNECTIONSTRING"];
+
+System.Diagnostics.Debug.WriteLine(mens);
+Console.WriteLine(mens);
+
 // Add database context and cache
 builder.Services.AddDbContext<MyDatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
